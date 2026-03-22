@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mood-Based Café Finder - Discover the perfect café in Indore based on your mood, company, and food preferences.">
+  <title>Mood-Based Café Finder | Find Your Perfect Café</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+</head>
+<body>
+
+  <!-- ============================== -->
+  <!-- PAGE 1: Mood & Companion       -->
+  <!-- ============================== -->
+  <div class="page active" id="page1">
+    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
+    <div class="page-overlay"></div>
+
+    <div class="page-content">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-label"><span class="icon">☕</span> MOOD-BASED CAFÉ FINDER</div>
+        <h1>Find Your<br><span>Perfect Café Vibe</span></h1>
+        <p class="tagline">Tell us your mood and we'll match you with the best cafés</p>
+      </div>
+
+      <!-- Mood Selection -->
+      <div class="section">
+        <h2 class="section-title">How are you feeling today?</h2>
+        <div class="options-grid mood-grid">
+          <div class="option-card" data-type="mood" data-value="Cozy" id="mood-cozy">
+            <span class="card-emoji">☕</span>
+            <span class="card-label">Cozy</span>
+          </div>
+          <div class="option-card" data-type="mood" data-value="Relax" id="mood-relax">
+            <span class="card-emoji">😌</span>
+            <span class="card-label">Relax</span>
+          </div>
+          <div class="option-card" data-type="mood" data-value="Romantic" id="mood-romantic">
+            <span class="card-emoji">❤️</span>
+            <span class="card-label">Romantic</span>
+          </div>
+          <div class="option-card" data-type="mood" data-value="Work" id="mood-work">
+            <span class="card-emoji">💼</span>
+            <span class="card-label">Work</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Companion Selection -->
+      <div class="section">
+        <h2 class="section-title">Who are you with?</h2>
+        <div class="options-grid companion-grid">
+          <div class="image-card" data-type="companion" data-value="Friends" id="comp-friends">
+            <img src="/images/friends.png" alt="Friends at café" class="card-image" loading="lazy">
+            <div class="card-label">Friends</div>
+          </div>
+          <div class="image-card" data-type="companion" data-value="Family" id="comp-family">
+            <img src="/images/family.png" alt="Family at café" class="card-image" loading="lazy">
+            <div class="card-label">Family</div>
+          </div>
+          <div class="image-card" data-type="companion" data-value="Couple" id="comp-couple">
+            <img src="/images/couple.png" alt="Couple at café" class="card-image" loading="lazy">
+            <div class="card-label">Couple</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Button -->
+      <button class="btn-primary" id="btn-next-1" disabled>
+        Next <span class="btn-arrow">→</span>
+      </button>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand">☕ Mood-Based Café Finder</div>
+        <p class="footer-tagline">Your perfect café experience awaits</p>
+        <div class="footer-divider"></div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Privacy</a>
+        </div>
+        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- PAGE 2: Seating & Food         -->
+  <!-- ============================== -->
+  <div class="page" id="page2">
+    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
+    <div class="page-overlay"></div>
+
+    <button class="btn-back" id="btn-back-2">← Back</button>
+
+    <div class="page-content">
+      <div class="hero">
+        <h1>Choose Your<br><span>Preference</span></h1>
+        <p class="tagline">Tell us what makes your café experience perfect</p>
+      </div>
+
+      <!-- Seating Selection -->
+      <div class="section">
+        <h2 class="section-title">Where do you want to sit?</h2>
+        <div class="options-grid seating-grid">
+          <div class="image-card large" data-type="seating" data-value="Indoor" id="seat-indoor">
+            <img src="/images/indoor.png" alt="Indoor Seating" class="card-image" loading="lazy">
+            <div class="card-label">Indoor Seating</div>
+          </div>
+          <div class="image-card large" data-type="seating" data-value="Outdoor" id="seat-outdoor">
+            <img src="/images/outdoor.png" alt="Outdoor Seating" class="card-image" loading="lazy">
+            <div class="card-label">Outdoor Seating</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Food Selection -->
+      <div class="section">
+        <h2 class="section-title">What would you like to eat?</h2>
+        <div class="options-grid food-grid">
+          <div class="image-card" data-type="food" data-value="Indian" id="food-indian">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=400&q=80" alt="Indian Food" class="card-image" loading="lazy">
+            <div class="card-label">Indian Food</div>
+          </div>
+          <div class="image-card" data-type="food" data-value="Snacks" id="food-snacks">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Snacks" class="card-image" loading="lazy">
+            <div class="card-label">Snacks</div>
+          </div>
+          <div class="image-card" data-type="food" data-value="Drinks" id="food-drinks">
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=400&q=80" alt="Drinks" class="card-image" loading="lazy">
+            <div class="card-label">Drinks</div>
+          </div>
+          <div class="image-card" data-type="food" data-value="Desserts" id="food-desserts">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=80" alt="Desserts" class="card-image" loading="lazy">
+            <div class="card-label">Desserts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Continue Button -->
+      <button class="btn-primary" id="btn-next-2" disabled>
+        Find Cafés <span class="btn-arrow">→</span>
+      </button>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand">☕ Mood-Based Café Finder</div>
+        <p class="footer-tagline">Your perfect café experience awaits</p>
+        <div class="footer-divider"></div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Privacy</a>
+        </div>
+        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- PAGE 3: Cafe Listings          -->
+  <!-- ============================== -->
+  <div class="page" id="page3">
+    <div class="page-bg" style="background-color: var(--clr-bg-dark)"></div>
+    <div class="page-overlay"></div>
+
+    <button class="btn-back" id="btn-back-3">← Back</button>
+
+    <div class="page-content">
+      <div class="listing-header">
+        <h1>Cafés for You in <span style="color: var(--clr-accent-light)">Indore</span></h1>
+        <div class="preference-tags" id="selected-tags"></div>
+      </div>
+
+      <!-- Cafe Cards Container -->
+      <div class="cafes-grid" id="cafes-container">
+        <!-- Filled dynamically by JS -->
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand">☕ Mood-Based Café Finder</div>
+        <p class="footer-tagline">Your perfect café experience awaits</p>
+        <div class="footer-divider"></div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Privacy</a>
+        </div>
+        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ============================== -->
+  <!-- PAGE 4: Cafe Details           -->
+  <!-- ============================== -->
+  <div class="page" id="page4">
+    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
+    <div class="page-overlay"></div>
+
+    <button class="btn-back" id="btn-back-4">← Back</button>
+
+    <div class="page-content">
+      <div class="detail-container" id="detail-container">
+        <!-- Filled dynamically by JS -->
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand">☕ Mood-Based Café Finder</div>
+        <p class="footer-tagline">Your perfect café experience awaits</p>
+        <div class="footer-divider"></div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Contact</a>
+          <a href="#" class="footer-link">Privacy</a>
+        </div>
+        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

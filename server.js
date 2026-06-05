@@ -16,33 +16,47 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ================================
-// MongoDB Connection & Step 1 Debugging
+// MongoDB Connection & Step 1 Debugging (Serverless Optimized)
 // ================================
 const mongoURI = 'mongodb+srv://rishiporwal2004_db_user:h3fR6pMIfvFqUolY@cluster0.qcgylva.mongodb.net/Cafe?retryWrites=true&w=majority&appName=Cluster0';
 
-mongoose.connect(mongoURI)
+// Global Mongoose Configuration for Serverless (don't buffer queries if DB is offline)
+mongoose.set('bufferCommands', false);
+
+const dbOptions = {
+  maxPoolSize: 5,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+};
+
+// Start connecting asynchronously at startup
+mongoose.connect(mongoURI, dbOptions)
   .then(async () => {
     console.log('✅ Connected to MongoDB Atlas');
-
-    // --- STEP 1: THE DOCUMENT COUNTER ---
     const dbName = mongoose.connection.name;
-    const collections = await mongoose.connection.db.listCollections().toArray();
-    const collectionNames = collections.map(c => c.name);
-    
-    console.log(`📂 Database: "${dbName}"`);
-    console.log(`📋 Collections found:`, collectionNames);
-
-    // This specifically checks the 'Cafe' collection
-    const count = await mongoose.connection.db.collection('Cafe').countDocuments();
-    console.log(`📊 Documents actually inside "Cafe" collection: ${count}`);
-
-    if (count === 0) {
-      console.error('❌ ERROR: Your database is EMPTY. Please run "node insertCafes.js" first!');
-    } else {
-      console.log('✨ SUCCESS: Data is present and ready to be served.');
-    }
+    const count = await mongoose.connection.db.collection('Cafe').countDocuments().catch(() => 0);
+    console.log(`📂 Database: "${dbName}" | 📊 Cafe Documents: ${count}`);
   })
-  .catch(err => console.error('❌ Connection Error:', err));
+  .catch(err => console.error('❌ MongoDB Connection Error:', err));
+
+// Middleware to ensure database connection is ready before handling /api requests
+app.use('/api', async (req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    return next();
+  }
+
+  try {
+    console.log(`🔄 Database connection not ready (State: ${mongoose.connection.readyState}). Reconnecting...`);
+    await mongoose.connect(mongoURI, dbOptions);
+    console.log('✅ Reconnected successfully to MongoDB Atlas');
+    next();
+  } catch (err) {
+    console.error('❌ Serverless Database connection failed:', err);
+    res.status(503).json({ 
+      error: 'Database connection failed. Please ensure the server and database are reachable.' 
+    });
+  }
+});
 
 // ================================
 // API Routes

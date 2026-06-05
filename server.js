@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const mongoURI = 'mongodb+srv://rishiporwal2004_db_user:h3fR6pMIfvFqUolY@cluster0.qcgylva.mongodb.net/Cafe?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(mongoURI)
   .then(async () => {
-    console.log('✅ Connected to MongoDB Atlas');
+    console.log('✅ Connected ');
 
     // --- STEP 1: THE DOCUMENT COUNTER ---
     const dbName = mongoose.connection.name;

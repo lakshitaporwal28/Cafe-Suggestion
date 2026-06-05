@@ -18,8 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ================================
 // MongoDB Connection & Step 1 Debugging
 // ================================
-const mongoURI = 'mongodb://rishiporwal2004_db_user:QiuKrisBkuBBVRnL@ac-mapqal2-shard-00-00.qcgylva.mongodb.net:27017,ac-mapqal2-shard-00-01.qcgylva.mongodb.net:27017,ac-mapqal2-shard-00-02.qcgylva.mongodb.net:27017/Cafe?ssl=true&replicaSet=atlas-bzna9s-shard-0&authSource=admin&retryWrites=true&w=majority';
-
+const mongoURI = 'mongodb+srv://rishiporwal2004_db_user:h3fR6pMIfvFqUolY@cluster0.qcgylva.mongodb.net/Cafe?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(mongoURI)
   .then(async () => {
     console.log('✅ Connected to MongoDB Atlas');

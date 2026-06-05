@@ -1,230 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mood-Based Café Finder - Discover the perfect café in Indore based on your mood, company, and food preferences.">
-  <title>Mood-Based Café Finder | Find Your Perfect Café</title>
+  <meta name="description"
+    content="Cafe Mood - Find your perfect café corner based on your mood, seating, company, and cravings.">
+  <title>Cafe Mood | Discover Your Perfect Cafe Vibe</title>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 </head>
+
 <body>
 
   <!-- ============================== -->
-  <!-- PAGE 1: Mood & Companion       -->
+  <!-- SIDE DRAWER NAVIGATION         -->
   <!-- ============================== -->
-  <div class="page active" id="page1">
-    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
-    <div class="page-overlay"></div>
-
-    <div class="page-content">
-      <!-- Hero -->
-      <div class="hero">
-        <div class="hero-label"><span class="icon">☕</span> MOOD-BASED CAFÉ FINDER</div>
-        <h1>Find Your<br><span>Perfect Café Vibe</span></h1>
-        <p class="tagline">Tell us your mood and we'll match you with the best cafés</p>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <aside class="side-drawer" id="side-drawer">
+    <div class="drawer-header">
+      <span class="drawer-brand">Cafe Mood ☕</span>
+      <button class="close-drawer-btn" id="close-drawer">✕</button>
+    </div>
+    <div class="drawer-user">
+      <div class="user-avatar-circle" id="drawer-user-avatar">G</div>
+      <div class="user-info">
+        <div class="user-name" id="drawer-user-name">Guest User</div>
       </div>
-
-      <!-- Mood Selection -->
-      <div class="section">
-        <h2 class="section-title">How are you feeling today?</h2>
-        <div class="options-grid mood-grid">
-          <div class="option-card" data-type="mood" data-value="Cozy" id="mood-cozy">
-            <span class="card-emoji">☕</span>
-            <span class="card-label">Cozy</span>
-          </div>
-          <div class="option-card" data-type="mood" data-value="Relax" id="mood-relax">
-            <span class="card-emoji">😌</span>
-            <span class="card-label">Relax</span>
-          </div>
-          <div class="option-card" data-type="mood" data-value="Romantic" id="mood-romantic">
-            <span class="card-emoji">❤️</span>
-            <span class="card-label">Romantic</span>
-          </div>
-          <div class="option-card" data-type="mood" data-value="Work" id="mood-work">
-            <span class="card-emoji">💼</span>
-            <span class="card-label">Work</span>
-          </div>
-
+    </div>
+    <nav class="drawer-menu" style="padding: 16px 0;">
+      <div class="drawer-stats-row" style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 16px;">
+        <div class="drawer-stat">
+          <div class="num" id="drawer-bookmarks" style="font-size: 1.25rem; font-weight: 800; color: var(--clr-accent);">0</div>
+          <div class="lbl" style="font-size: 0.7rem; font-weight: 700; color: var(--clr-text-muted); margin-top: 4px; letter-spacing: 0.5px;">BOOKMARKS</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="num" id="drawer-searches" style="font-size: 1.25rem; font-weight: 800; color: var(--clr-accent);">0</div>
+          <div class="lbl" style="font-size: 0.7rem; font-weight: 700; color: var(--clr-text-muted); margin-top: 4px; letter-spacing: 0.5px;">SEARCHES</div>
+        </div>
+        <div class="drawer-stat">
+          <div class="num" id="drawer-bookings" style="font-size: 1.25rem; font-weight: 800; color: var(--clr-accent);">0</div>
+          <div class="lbl" style="font-size: 0.7rem; font-weight: 700; color: var(--clr-text-muted); margin-top: 4px; letter-spacing: 0.5px;">BOOKINGS</div>
         </div>
       </div>
 
-      <!-- Companion Selection -->
-      <div class="section">
-        <h2 class="section-title">Who are you with?</h2>
-        <div class="options-grid companion-grid">
-          <div class="image-card" data-type="companion" data-value="Friends" id="comp-friends">
-            <img src="/images/friends.png" alt="Friends at café" class="card-image" loading="lazy">
-            <div class="card-label">Friends</div>
-          </div>
-          <div class="image-card" data-type="companion" data-value="Family" id="comp-family">
-            <img src="/images/family.png" alt="Family at café" class="card-image" loading="lazy">
-            <div class="card-label">Family</div>
-          </div>
-          <div class="image-card" data-type="companion" data-value="Couple" id="comp-couple">
-            <img src="/images/couple.png" alt="Couple at café" class="card-image" loading="lazy">
-            <div class="card-label">Couple</div>
+      <div class="drawer-divider"></div>
+
+      <a href="#" class="drawer-item" id="drawer-home" style="margin: 0 8px;">
+        <span class="icon">🧭</span> All Cafes
+      </a>
+      <a href="#" class="drawer-item" id="drawer-saved" style="margin: 0 8px;">
+        <span class="icon">🔖</span> Saved Cafes
+      </a>
+    </nav>
+    <div class="drawer-footer">
+      <p>Cafe Mood App v1.2.0</p>
+    </div>
+  </aside>
+
+  <!-- ============================== -->
+  <!-- GLOBAL APP CONTAINER           -->
+  <!-- ============================== -->
+  <div class="app-container">
+
+    <!-- GLOBAL HEADER -->
+    <header class="app-header">
+      <button class="header-btn" id="menu-toggle" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <span class="header-title" id="header-title-text">Cafe Mood</span>
+      <button class="header-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <div class="progress-bar-container" id="global-progress">
+        <div class="progress-bar" id="progress-indicator" style="width: 25%;"></div>
+      </div>
+    </header>
+
+    <!-- BACK BUTTON FOR STEPPER -->
+    <button class="btn-back-v2 hidden" id="global-back-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back
+    </button>
+
+    <!-- MAIN INTERACTIVE CONTENT AREA -->
+    <main class="app-main-content">
+
+      <!-- ============================== -->
+      <!-- PAGE 0: LOGIN & SIGNUP         -->
+      <!-- ============================== -->
+      <section class="page active" id="page0">
+        <div class="auth-wrapper">
+          <div class="auth-card" id="auth-card">
+            <h2 class="auth-title" id="auth-title">Welcome back</h2>
+            <p class="auth-subtitle" id="auth-subtitle">Log in to discover your perfect cafe vibe</p>
+            
+            <form id="auth-form" class="auth-form">
+              <input type="text" id="auth-name" class="auth-input hidden" placeholder="Full Name">
+              <input type="email" id="auth-email" class="auth-input" placeholder="Email Address" required>
+              <input type="password" id="auth-password" class="auth-input" placeholder="Password" required>
+              <button type="submit" class="auth-btn" id="auth-submit-btn">Log In</button>
+            </form>
+            
+            <span class="auth-toggle-link" id="auth-toggle-btn">Don't have an account? Sign up</span>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Next Button -->
-      <button class="btn-primary" id="btn-next-1" disabled>
-        Next <span class="btn-arrow">→</span>
+      <!-- ============================== -->
+      <!-- PAGE 1: PHASE 01 & PHASE 02    -->
+      <!-- ============================== -->
+      <section class="page" id="page1">
+        <div class="page1-flex-container" style="display: flex; flex-direction: column; gap: 24px;">
+          <!-- Brand Hero -->
+          <div class="brand-hero" style="flex: 1; text-align: left;">
+            <h1 class="brand-title">Find your perfect cafe vibe</h1>
+            <p class="brand-subtitle" style="margin: 0; margin-top: 10px;">Tell us your mood and we'll match you with the best cafes</p>
+          </div>
+
+          <!-- PHASE 01 -->
+          <div class="phase-section" style="flex: 1;">
+            <span class="phase-num">PHASE 01</span>
+            <h2 class="phase-heading">How are you feeling today?</h2>
+
+            <div class="options-grid-v2 mood-grid-v2">
+              <!-- Romantic Card -->
+              <div class="option-card-v2" data-type="mood" data-value="Romantic">
+                <div class="card-img-wrapper">
+                  <img src="/images/romantic.jpg" alt="Romantic Mood" loading="lazy">
+                </div>
+                <div class="card-info">
+                  <span class="card-label-v2">Romantic</span>
+                  <span class="card-sub-v2">Dim lights & cozy corners</span>
+                </div>
+              </div>
+
+              <!-- Cozy Card -->
+              <div class="option-card-v2" data-type="mood" data-value="Cozy">
+                <div class="card-img-wrapper">
+                  <img src="/images/cozy.jpg" alt="Cozy Mood" loading="lazy">
+                </div>
+                <div class="card-info">
+                  <span class="card-label-v2">Cozy</span>
+                  <span class="card-sub-v2">Warm spaces & sweet lights</span>
+                </div>
+              </div>
+
+              <!-- Relax Card -->
+              <div class="option-card-v2" data-type="mood" data-value="Relax">
+                <div class="card-img-wrapper">
+                  <img src="/images/relax.jpg" alt="Relax Mood" loading="lazy">
+                </div>
+                <div class="card-info">
+                  <span class="card-label-v2">Relax</span>
+                  <span class="card-sub-v2">Quiet spots & calm times</span>
+                </div>
+              </div>
+
+              <!-- Work Card -->
+              <div class="option-card-v2" data-type="mood" data-value="Work">
+                <div class="card-img-wrapper">
+                  <img src="/images/work.jpg" alt="Work Mood" loading="lazy">
+                </div>
+                <div class="card-info">
+                  <span class="card-label-v2">Work</span>
+                  <span class="card-sub-v2">Productive corners & wifi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHASE 02 -->
+        <div class="phase-section" style="margin-top: 35px; margin-bottom: 25px;">
+          <span class="phase-num">PHASE 02</span>
+          <h2 class="phase-heading">Who are you with?</h2>
+
+          <div class="selection-list-v2">
+            <!-- Family Card -->
+            <div class="selection-card-v2" data-type="companion" data-value="Family">
+              <div class="card-radio-circle"></div>
+              <div class="card-icon-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="card-text-content">
+                <span class="card-main-title">Family</span>
+                <span class="card-sub-title">Spacious & kid-friendly</span>
+              </div>
+            </div>
+
+            <!-- Couples Card -->
+            <div class="selection-card-v2" data-type="companion" data-value="Couple">
+              <div class="card-radio-circle"></div>
+              <div class="card-icon-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </div>
+              <div class="card-text-content">
+                <span class="card-main-title">Couples</span>
+                <span class="card-sub-title">Intimate setting</span>
+              </div>
+            </div>
+
+            <!-- Friends Card -->
+            <div class="selection-card-v2" data-type="companion" data-value="Friends">
+              <div class="card-radio-circle"></div>
+              <div class="card-icon-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <line x1="17" y1="8" x2="22" y2="13"></line>
+                  <line x1="22" y1="8" x2="17" y2="13"></line>
+                </svg>
+              </div>
+              <div class="card-text-content">
+                <span class="card-main-title">Friends</span>
+                <span class="card-sub-title">Large tables & vibes</span>
+              </div>
+            </div>
+
+            <!-- Colleagues Card -->
+            <div class="selection-card-v2" data-type="companion" data-value="Colleagues">
+              <div class="card-radio-circle"></div>
+              <div class="card-icon-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="card-text-content">
+                <span class="card-main-title">Colleagues</span>
+                <span class="card-sub-title">Quiet for meetings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue Button -->
+        <div class="action-btn-container">
+          <button class="btn-continue" id="btn-next-1">
+            Continue <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- PAGE 2: SEATING & FOOD         -->
+      <!-- ============================== -->
+      <section class="page" id="page2">
+        <!-- Seating Section -->
+        <div class="phase-section">
+          <h2 class="phase-heading centering">What kind of seating<br>do you prefer?</h2>
+          <p class="phase-desc centering">Find your perfect corner. Whether it's the cozy warmth of our interiors or the
+            refreshing breeze of our terrace.</p>
+
+          <div class="seating-grid-v2">
+            <!-- Indoor Seating -->
+            <div class="seating-card-v2" data-type="seating" data-value="Indoor">
+              <div class="seating-img-wrapper">
+                <img src="/images/indoor.png" alt="Indoor Seating"
+                  onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"
+                  loading="lazy">
+                <div class="seating-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                  INTERIOR
+                </div>
+              </div>
+              <span class="seating-label-v2">Indoor Seating</span>
+            </div>
+
+            <!-- Outdoor Seating -->
+            <div class="seating-card-v2" data-type="seating" data-value="Outdoor">
+              <div class="seating-img-wrapper">
+                <img src="/images/outdoor.png" alt="Outdoor Seating"
+                  onerror="this.src='https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=600&q=80'"
+                  loading="lazy">
+                <div class="seating-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                  </svg>
+                  TERRACE
+                </div>
+              </div>
+              <span class="seating-label-v2">Outdoor Seating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food Section -->
+        <div class="phase-section" style="margin-top: 35px; margin-bottom: 25px;">
+          <h2 class="phase-heading centering">What would you love<br>to eat?</h2>
+          <p class="phase-desc centering">Curated flavors from our artisanal kitchen, designed to complement your mood.
+          </p>
+
+          <div class="food-grid-v2">
+            <!-- Indian -->
+            <div class="food-card-v2" data-type="food" data-value="Indian">
+              <div class="food-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=100" alt="Indian Food"
+                  loading="lazy">
+              </div>
+              <div class="food-footer-label">
+                <div class="food-icon-container" style="color: #A34E36;">
+                  🍴
+                </div>
+                <span class="food-name-v2">Indian</span>
+              </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="food-card-v2" data-type="food" data-value="Desserts">
+              <div class="food-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=100" alt="Desserts"
+                  loading="lazy">
+              </div>
+              <div class="food-footer-label">
+                <div class="food-icon-container" style="color: #92537D;">
+                  🧁
+                </div>
+                <span class="food-name-v2">Desserts</span>
+              </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="food-card-v2" data-type="food" data-value="Drinks">
+              <div class="food-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=100" alt="Beverages"
+                  loading="lazy">
+              </div>
+              <div class="food-footer-label">
+                <div class="food-icon-container" style="color: #8D511A;">
+                  ☕
+                </div>
+                <span class="food-name-v2">Beverages</span>
+              </div>
+            </div>
+
+            <!-- Snacks -->
+            <div class="food-card-v2" data-type="food" data-value="Snacks">
+              <div class="food-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=100" alt="Snacks"
+                  loading="lazy">
+              </div>
+              <div class="food-footer-label">
+                <div class="food-icon-container" style="color: #367A59;">
+                  🍢
+                </div>
+                <span class="food-name-v2">Snacks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue Button -->
+        <div class="action-btn-container">
+          <button class="btn-continue" id="btn-next-2">
+            Continue <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- PAGE 3: RESULTS (CAFES LIST)   -->
+      <!-- ============================== -->
+      <section class="page" id="page3">
+        <!-- Search bar -->
+        <div class="search-section-v2">
+          <div class="search-bar-v2">
+            <svg class="search-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="search-input" placeholder="Search another Vibe...">
+          </div>
+        </div>
+
+
+
+        <!-- Heading -->
+        <div class="results-heading-container">
+          <h2 class="results-main-heading" id="results-headline">Here are cafes<br>perfectly matching<br>your vibe today
+            ✨</h2>
+        </div>
+
+        <!-- Cafes List -->
+        <div class="cafes-vertical-list" id="cafes-container">
+          <!-- Filled dynamically by JS -->
+        </div>
+
+        <div style="height: 100px;"></div> <!-- Padding for bottom nav -->
+      </section>
+
+      <!-- ============================== -->
+      <!-- PAGE 4: DETAILS VIEW           -->
+      <!-- ============================== -->
+    <!-- PAGE 4: CAFE DETAILS -->
+    <section id="page4" class="page">
+      <div id="detail-container" class="detail-view-container">
+        <!-- Populated via JS -->
+      </div>
+      <div style="height: 100px;"></div> <!-- Padding for bottom nav -->
+    </section>
+
+    <!-- PAGE 5: BOOKING PAGE -->
+    <section id="page5" class="page">
+      <div class="brand-hero">
+        <h2 class="brand-title">Reserve a Table</h2>
+        <p class="brand-subtitle">Secure your spot effortlessly.</p>
+      </div>
+      <div id="booking-container" class="detail-view-container" style="justify-content: center;">
+        <!-- Populated via JS -->
+      </div>
+      <div style="height: 100px;"></div> <!-- Padding for bottom nav -->
+    </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer" style="padding: 24px; text-align: center; border-top: 1px solid var(--clr-border); margin-bottom: 120px; position: relative; z-index: 50;">
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 12px;">
+        <a href="#" onclick="openAboutModal(); return false;" id="footer-about-link" style="color: var(--clr-text-main); font-weight: 600; text-decoration: none;">About</a>
+        <a href="#" onclick="openContactModal(); return false;" id="footer-contact-link" style="color: var(--clr-text-main); font-weight: 600; text-decoration: none;">Contact</a>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--clr-text-muted);">Made by Lakshita</p>
+    </footer>
+
+    <!-- ============================== -->
+    <!-- STICKY BOTTOM NAVIGATION BAR   -->
+    <!-- ============================== -->
+    <nav class="bottom-navigation-bar">
+      <button class="nav-tab-v2 active" id="tab-btn-explore" aria-label="Explore Vibes">
+        <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
       </button>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand">☕ Mood-Based Café Finder</div>
-        <p class="footer-tagline">Your perfect café experience awaits</p>
-        <div class="footer-divider"></div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">About</a>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Privacy</a>
-        </div>
-        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
-      </footer>
-    </div>
-  </div>
-
-  <!-- ============================== -->
-  <!-- PAGE 2: Seating & Food         -->
-  <!-- ============================== -->
-  <div class="page" id="page2">
-    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
-    <div class="page-overlay"></div>
-
-    <button class="btn-back" id="btn-back-2">← Back</button>
-
-    <div class="page-content">
-      <div class="hero">
-        <h1>Choose Your<br><span>Preference</span></h1>
-        <p class="tagline">Tell us what makes your café experience perfect</p>
-      </div>
-
-      <!-- Seating Selection -->
-      <div class="section">
-        <h2 class="section-title">Where do you want to sit?</h2>
-        <div class="options-grid seating-grid">
-          <div class="image-card large" data-type="seating" data-value="Indoor" id="seat-indoor">
-            <img src="/images/indoor.png" alt="Indoor Seating" class="card-image" loading="lazy">
-            <div class="card-label">Indoor Seating</div>
-          </div>
-          <div class="image-card large" data-type="seating" data-value="Outdoor" id="seat-outdoor">
-            <img src="/images/outdoor.png" alt="Outdoor Seating" class="card-image" loading="lazy">
-            <div class="card-label">Outdoor Seating</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Food Selection -->
-      <div class="section">
-        <h2 class="section-title">What would you like to eat?</h2>
-        <div class="options-grid food-grid">
-          <div class="image-card" data-type="food" data-value="Indian" id="food-indian">
-            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=400&q=80" alt="Indian Food" class="card-image" loading="lazy">
-            <div class="card-label">Indian Food</div>
-          </div>
-          <div class="image-card" data-type="food" data-value="Snacks" id="food-snacks">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Snacks" class="card-image" loading="lazy">
-            <div class="card-label">Snacks</div>
-          </div>
-          <div class="image-card" data-type="food" data-value="Drinks" id="food-drinks">
-            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=400&q=80" alt="Drinks" class="card-image" loading="lazy">
-            <div class="card-label">Drinks</div>
-          </div>
-          <div class="image-card" data-type="food" data-value="Desserts" id="food-desserts">
-            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=80" alt="Desserts" class="card-image" loading="lazy">
-            <div class="card-label">Desserts</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Continue Button -->
-      <button class="btn-primary" id="btn-next-2" disabled>
-        Find Cafés <span class="btn-arrow">→</span>
+      <button class="nav-tab-v2" id="tab-btn-saved" aria-label="Saved Cafes">
+        <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
       </button>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand">☕ Mood-Based Café Finder</div>
-        <p class="footer-tagline">Your perfect café experience awaits</p>
-        <div class="footer-divider"></div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">About</a>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Privacy</a>
+      <button class="nav-tab-v2" id="tab-btn-profile" aria-label="Settings and Profile">
+        <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- CROWD PREDICTOR MODAL -->
+  <div class="crowd-modal-overlay" id="crowd-modal">
+    <div class="crowd-modal-content">
+      <button class="modal-close" id="close-modal-btn">✕</button>
+      <div class="modal-header">
+        📈 Live Crowd Predictor
+      </div>
+      <div class="modal-body">
+        <p>Current Time: <span id="modal-time"></span></p>
+        <div class="modal-status-badge" id="modal-status">
+          <!-- Populated by JS -->
         </div>
-        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
-      </footer>
+        <p>Best Time To Visit: <span id="modal-best-time"></span></p>
+        <p>Peak Hours: <span id="modal-peak-hours"></span></p>
+      </div>
     </div>
   </div>
 
-  <!-- ============================== -->
-  <!-- PAGE 3: Cafe Listings          -->
-  <!-- ============================== -->
-  <div class="page" id="page3">
-    <div class="page-bg" style="background-color: var(--clr-bg-dark)"></div>
-    <div class="page-overlay"></div>
-
-    <button class="btn-back" id="btn-back-3">← Back</button>
-
-    <div class="page-content">
-      <div class="listing-header">
-        <h1>Cafés for You in <span style="color: var(--clr-accent-light)">Indore</span></h1>
-        <div class="preference-tags" id="selected-tags"></div>
+  <!-- ABOUT MODAL -->
+  <div class="crowd-modal-overlay" id="about-modal">
+    <div class="crowd-modal-content">
+      <button class="modal-close close-info-modal" id="close-about-modal-btn">✕</button>
+      <div class="modal-header">
+        ℹ️ About Cafe Mood
       </div>
-
-      <!-- Cafe Cards Container -->
-      <div class="cafes-grid" id="cafes-container">
-        <!-- Filled dynamically by JS -->
+      <div class="modal-body">
+        <p style="margin-bottom: 24px; font-size: 1.05rem; color: var(--clr-text-main); line-height: 1.6; text-align: left;">
+          Cafe Mood is your personal gateway to discovering the perfect cafe experience. Whether you're seeking a cozy corner to read, a vibrant spot for friends, or a quiet place to work, we curate the best choices for you.
+        </p>
+        <p style="font-size: 0.95rem; color: var(--clr-text-muted); font-weight: 600; text-align: left;">Built with ❤️ by Lakshita to bring cafe lovers and perfect aesthetics together.</p>
       </div>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand">☕ Mood-Based Café Finder</div>
-        <p class="footer-tagline">Your perfect café experience awaits</p>
-        <div class="footer-divider"></div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">About</a>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Privacy</a>
-        </div>
-        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
-      </footer>
     </div>
   </div>
 
-  <!-- ============================== -->
-  <!-- PAGE 4: Cafe Details           -->
-  <!-- ============================== -->
-  <div class="page" id="page4">
-    <div class="page-bg" style="background-image: url('/images/aesthetic_preview.jpg')"></div>
-    <div class="page-overlay"></div>
-
-    <button class="btn-back" id="btn-back-4">← Back</button>
-
-    <div class="page-content">
-      <div class="detail-container" id="detail-container">
-        <!-- Filled dynamically by JS -->
+  <!-- CONTACT MODAL -->
+  <div class="crowd-modal-overlay" id="contact-modal">
+    <div class="crowd-modal-content">
+      <button class="modal-close close-info-modal" id="close-contact-modal-btn">✕</button>
+      <div class="modal-header">
+        ✉️ Contact Us
       </div>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-brand">☕ Mood-Based Café Finder</div>
-        <p class="footer-tagline">Your perfect café experience awaits</p>
-        <div class="footer-divider"></div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">About</a>
-          <a href="#" class="footer-link">Contact</a>
-          <a href="#" class="footer-link">Privacy</a>
+      <div class="modal-body">
+        <p style="margin-bottom: 24px; font-size: 1.05rem; color: var(--clr-text-main); text-align: left;">
+          Have a question, a bug to report, or just want to say hello? Reach out directly.
+        </p>
+        <div style="background-color: var(--clr-bg-app); border: 1.5px solid var(--clr-border); border-radius: var(--radius-md); padding: 24px; display: inline-block; width: 100%;">
+          <div style="font-size: 0.8rem; font-weight: 800; color: var(--clr-text-muted); letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; text-align: left;">Direct Email</div>
+          <a href="mailto:lakshitaporwal28@gmail.com" style="color: var(--clr-accent); text-decoration: none; font-weight: 800; font-size: 1.15rem; word-break: break-all;">lakshitaporwal28@gmail.com</a>
         </div>
-        <p class="footer-copy">Made with <span class="heart">❤</span> in Indore &copy; 2026</p>
-      </footer>
+      </div>
     </div>
   </div>
+
+
 
   <script src="/app.js"></script>
 </body>
+
 </html>
